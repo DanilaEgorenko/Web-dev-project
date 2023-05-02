@@ -1,11 +1,17 @@
 <template>
-  <v-app>
-    <div id="app">
-      <router-view/>
-    </div>
-  </v-app>
+  <div id="app">
+    <header-component/>
+    <router-view/>
+    <footer-component/>
+  </div>
 </template>
 
-<style>
+<script>
+import HeaderComponent from './components/HeaderComponent.vue';
+import FooterComponent from './components/FooterComponent.vue';
 
-</style>
+export default {
+  name: 'app',
+  components: { FooterComponent, HeaderComponent }
+}
+</script>
