@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -312,14 +313,95 @@ template {
   width: 1440px;
   display: flex;
   justify-content: space-between;
-  margin: 0 auto 16px auto;
+  margin: 20px auto 20px auto;
+  height: 80px;
 }
 .header__nav-list {
   display: flex;
+  height: 100%;
+  margin: 0;
   justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+.header__btn-list {
+  height: 100%;
+  margin: 0;
+}
+.header__btn-item {
+  height: 100%;
+  display: inline-block;
+}
+.header__link {
+  text-decoration: none;
+  color: black;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #EA7EA0;
+  height: 60px;
+  border: none;
+  border-radius: 30px;
+  padding: 0 75px 0 75px;
+  width: -moz-fit-content;
+  width: fit-content;
+  color: white;
+}
+.button:hover {
+  cursor: pointer;
+}
+.button:active {
+  background-color: rgb(233, 233, 233);
+}
+.button--icon {
+  background: none;
+  height: 80px;
+  width: 80px;
+  padding: 0;
+  border-radius: 100%;
+}
+
+.banner {
+  background-size: cover;
+  width: 1440px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), url(/img/necklace-мiew-from-the-back.png);
+  margin: 0 auto 0 auto;
+  padding: 64px 64px 64px 64px;
+  background-size: cover;
+}
+.banner__title {
+  font-family: "Cormorant Unicase";
+  text-transform: uppercase;
+  font-weight: lighter;
+  font-size: 96px;
+  width: 720px;
+  color: white;
+  margin: 0 0 75px 0;
+}
+.banner__link {
+  text-decoration: none;
+  margin-left: auto;
+  margin-right: 150px;
+}
+
+html {
+  font-family: "Comfortaa";
 }
 
 ul {
   list-style-type: none;
   padding-left: 0;
+}
+
+@font-face {
+  font-family: Comfortaa;
+  src: url(fonts/Comfortaa.ttf);
+}
+@font-face {
+  font-family: Cormorant;
+  src: url(fonts/Cormorant-Regular.ttf);
 }/*# sourceMappingURL=style.css.map */

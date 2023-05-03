@@ -1,6 +1,6 @@
 <template>
     <main>
-        <!-- <banner></banner> -->
+        <banner-component/>
         <h2>Каталог</h2>
         <div></div>
         <form action=""></form>
@@ -8,4 +8,14 @@
     </main>
 </template>
 
-<script></script>
+<script>
+import BannerComponent from '@/components/BannerComponent.vue';
+
+export default {
+    name: "MainPage",
+    comments: {
+        BannerComponent
+    },
+    components: { BannerComponent }
+}
+</script>

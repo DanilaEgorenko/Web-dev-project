@@ -1,0 +1,26 @@
+@use '../variables';
+
+.banner {
+    background-size: cover;
+    width: variables.$large-width;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), url(/img/necklace-мiew-from-the-back.png);
+    margin: 0 auto 0 auto;
+    padding: 64px 64px 64px 64px;
+    background-size: cover;
+
+    &__title {
+        font-family: 'Cormorant Unicase';
+        text-transform: uppercase;
+        font-weight: lighter;
+        font-size: 96px;
+        width: calc(variables.$large-width / 2);
+        color: variables.$main-light-text;
+        margin: 0 0 75px 0;
+    }
+
+    &__link {
+        text-decoration: none;
+        margin-left: auto;
+        margin-right: 150px;
+    }
+}

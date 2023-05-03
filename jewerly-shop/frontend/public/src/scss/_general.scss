@@ -1,5 +1,12 @@
 @use 'variables';
 @use 'blocks/header';
+@use 'blocks/button';
+@use 'blocks/banner';
+
+
+html {
+    font-family: 'Comfortaa';
+}
 
 ul {
     list-style-type: none;

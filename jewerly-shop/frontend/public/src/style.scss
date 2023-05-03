@@ -1,2 +1,12 @@
 @use 'scss/normalize';
 @use 'scss/general';
+
+@font-face {
+    font-family: Comfortaa;
+    src: url(fonts/Comfortaa.ttf);
+}
+
+@font-face {
+    font-family: Cormorant;
+    src: url(fonts/Cormorant-Regular.ttf);
+}

@@ -1,12 +1,12 @@
 <template>
     <header class='header'>
-        <img src='@/assets/logo.svg' class='header__logo' alt="logo">
+        <img src='@/assets/logo.png' class='header__logo' alt="logo">
         <nav class='header__nav'>
             <ul class='header__nav-list'>
-                <li class='header__nav-item'>О нас</li>
-                <li class='header__nav-item'>Магазины</li>
-                <li class='header__nav-item'>Контакты</li>
-                <li class='header__nav-item'>Доставка и возврат</li>
+                <li class='header__nav-item'><a href='#' class='header__link'>О нас</a></li>
+                <li class='header__nav-item'><a href='#' class='header__link'>Магазины</a></li>
+                <li class='header__nav-item'><a href='#' class='header__link'>Контакты</a></li>
+                <li class='header__nav-item'><a href='#' class='header__link'>Доставка и возврат</a></li>
             </ul>
         </nav>
         <ul class='header__btn-list'>

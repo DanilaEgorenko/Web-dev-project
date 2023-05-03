@@ -4,10 +4,30 @@
     width: variables.$large-width;
     display: flex;
     justify-content: space-between;
-    margin: 0 auto 16px auto;
+    margin: 20px auto 20px auto;
+    height: 80px;
 
     &__nav-list {
         display: flex;
+        height: 100%;
+        margin: 0;
         justify-content: space-between;
+        align-items: center;
+        gap: 40px;
+    }
+
+    &__btn-list {
+        height: 100%;
+        margin: 0;
+    }
+
+    &__btn-item {
+        height: 100%;
+        display: inline-block;
+    }
+
+    &__link {
+        text-decoration: none;
+        color: variables.$main-dark-text;
     }
 }
