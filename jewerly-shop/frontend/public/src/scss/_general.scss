@@ -2,6 +2,7 @@
 @use 'blocks/header';
 @use 'blocks/button';
 @use 'blocks/banner';
+@use 'blocks/short-catalog';
 
 
 html {
@@ -11,4 +12,11 @@ html {
 ul {
     list-style-type: none;
     padding-left: 0;
+}
+
+h2 {
+    font-size: 36px;
+    line-height: 40px;
+    text-align: center;
+    font-weight: 400;
 }

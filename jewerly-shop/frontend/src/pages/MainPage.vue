@@ -2,20 +2,19 @@
     <main>
         <banner-component/>
         <h2>Каталог</h2>
-        <div></div>
+        <short-catalog-component/>
         <form action=""></form>
-        <!-- <recently-bought></recently-bought> -->
+        <recently-bought-component/>
     </main>
 </template>
 
 <script>
 import BannerComponent from '@/components/BannerComponent.vue';
+import RecentlyBoughtComponent from '@/components/RecentlyBoughtComponent.vue';
+import ShortCatalogComponent from '@/components/ShortCatalogComponent.vue'
 
 export default {
-    name: "MainPage",
-    comments: {
-        BannerComponent
-    },
-    components: { BannerComponent }
+    name: "main-page",
+    components: { BannerComponent, RecentlyBoughtComponent, ShortCatalogComponent }
 }
 </script>
