@@ -3,7 +3,7 @@
         <banner-component/>
         <h2>Каталог</h2>
         <short-catalog-component/>
-        <form action=""></form>
+        <lead-form-component/>
         <recently-bought-component/>
     </main>
 </template>
@@ -12,10 +12,11 @@
 import BannerComponent from '@/components/BannerComponent.vue';
 import RecentlyBoughtComponent from '@/components/RecentlyBoughtComponent.vue';
 import ShortCatalogComponent from '@/components/ShortCatalogComponent.vue'
+import LeadFormComponent from '@/components/LeadFormComponent.vue';
 
 export default {
     name: "main-page",
-    components: { BannerComponent, RecentlyBoughtComponent, ShortCatalogComponent }
+    components: { BannerComponent, RecentlyBoughtComponent, ShortCatalogComponent, LeadFormComponent }
 }
 </script>
 
