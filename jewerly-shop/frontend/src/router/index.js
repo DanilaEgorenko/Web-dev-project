@@ -1,6 +1,7 @@
+import MainPage from '@/pages/MainPage'
+import SignInPage from '@/pages/SignInPage'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import MainPage from '@/pages/MainPage'
 
 Vue.use(VueRouter)
 
@@ -9,6 +10,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: MainPage,
+  },
+  {
+    path: '/signin',
+    name: 'signin',
+    component: SignInPage,
   },
 ]
 
