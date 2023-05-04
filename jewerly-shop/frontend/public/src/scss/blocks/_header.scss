@@ -1,0 +1,13 @@
+@use '../variables.scss';
+
+.header {
+    width: variables.$large-width;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 16px auto;
+
+    &__nav-list {
+        display: flex;
+        justify-content: space-between;
+    }
+}
