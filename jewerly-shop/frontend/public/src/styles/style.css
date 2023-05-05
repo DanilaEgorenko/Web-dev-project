@@ -308,18 +308,27 @@ template {
   display: none;
 }
 
-.header {
-  width: 1440px;
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto 16px auto;
-}
-.header__nav-list {
-  display: flex;
-  justify-content: space-between;
+html {
+  font-family: "Comfortaa";
 }
 
 ul {
   list-style-type: none;
   padding-left: 0;
+}
+
+h2 {
+  font-size: 36px;
+  line-height: 40px;
+  text-align: center;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Comfortaa;
+  src: url(../fonts/Comfortaa.ttf);
+}
+@font-face {
+  font-family: Cormorant;
+  src: url(../fonts/Cormorant-Regular.ttf);
 }/*# sourceMappingURL=style.css.map */
