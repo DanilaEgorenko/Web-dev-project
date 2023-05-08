@@ -3,14 +3,18 @@
     <form class="signin" action="">
       <h2>Войти в аккаунт</h2>
       <div class="signin__choices">
-        <input type="radio" id="contactChoice1" name="signin" value="phone" checked>
-        <label for="contactChoice1">Через телефон</label>
-        <input type="radio" id="contactChoice2" name="signin" value="email">
-        <label for="contactChoice2">Через email</label>
+        <div class="signin__choice">
+          <input type="radio" id="contactChoice1" name="signin" v-model='signInMethod' value="phone" checked>
+          <label for="contactChoice1">Через телефон</label>
+        </div>
+        <div class="signin__choice">
+          <input type="radio" id="contactChoice2" name="signin" v-model='signInMethod' value="email">
+          <label for="contactChoice2">Через email</label>
+        </div>
       </div>
       <div class="signin__form">
-        <input type="phone" inputmode="tel" placeholder="+7 (___) ___ __ __">
-        <input type="email" inputmode="email" placeholder="example@mail.ru">
+        <input v-if='signInMethod === "email"' type="email" inputmode="email" placeholder="example@mail.ru">
+        <input v-else-if='signInMethod === "phone"' type="phone" inputmode="tel" placeholder="+7 (___) ___ __ __">
         <input type="password" placeholder="Введите пароль">
         <div class="signin__form-checkbox">
           <input type="checkbox" id="remember_me" name="remember_me" checked>
@@ -25,6 +29,17 @@
     </form>
   </main>
 </template>
+
+<script>
+export default {
+  name: 'signin-page',
+  data() {
+    return {
+      signInMethod: "phone"
+    }
+  },
+}
+</script>
 
 <style scoped>
 main {
@@ -41,7 +56,6 @@ main {
 }
 
 .signin__choices {
-  text-decoration: underline;
   display: flex;
   gap: 40px;
   margin: 20px 30px 0 30px;
@@ -73,8 +87,8 @@ main {
   margin-bottom: 62px;
 }
 
-.signin__actions a {
-  text-decoration: none;
+.signin__choices input+label {
+  text-decoration: underline;
   color: black;
 }
 
@@ -92,6 +106,13 @@ input {
   padding: 11px 0;
   padding-left: 32px;
 }
-</style>
 
-<script></script>
+.signin__choices input:checked+label {
+  color: grey;
+  text-decoration: none;
+}
+
+.signin__choices input:not(:checked)+label:hover {
+  cursor: pointer;
+}
+</style>
