@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+    backend:
+        tty: true 
+        build: backend
+        command: python manage.py runserver 0.0.0.0:8000
+        ports:
+            - 8000:8000
+        volumes:
+            - ./backend:/root/server
+    frontend:
+        build: frontend
+        command: npm run serve
+        ports:
+            - 8080:8080
+        volumes:
+            - ./frontend:/app
