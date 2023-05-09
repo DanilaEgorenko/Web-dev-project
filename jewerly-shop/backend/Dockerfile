@@ -1,8 +1,7 @@
 FROM python:3.9
 
-ENV PYTHONUNBUFFERED=1
-
-ADD ./ /
+WORKDIR /root/server
+ADD ./ /root/server/
 
 RUN python -m pip install --upgrade pip
 RUN pip install -r ./requirements.txt
