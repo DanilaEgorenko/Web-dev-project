@@ -11,12 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import os
-import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,7 +24,6 @@ SECRET_KEY = 'django-insecure-h=8q%agz4lhl67^+1ag=p$70@34p8nd3pzk&#ahb%)dkx2av#w
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -48,9 +44,9 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [  
-    'goods',
-    'orders',
-    'users',
+    'apps.goods',
+    'apps.orders',
+    'apps.users',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
