@@ -16,9 +16,9 @@
                 </button>
             </li>
             <li class='header__btn-item'>
-                <button class='button button--icon'>
+                <router-link class='button button--icon' to="basket">
                     <img src='@/assets/img/shopping-card-icon.svg' alt="shopping-cart-icon">
-                </button>
+                </router-link>
             </li>
             <li class='header__btn-item'>
                 <button class='button button--icon'>
@@ -31,7 +31,7 @@
 
 <script>
 export default {
-    name: 'header-component'
+    name: 'header-component',
 }
 </script>
 
