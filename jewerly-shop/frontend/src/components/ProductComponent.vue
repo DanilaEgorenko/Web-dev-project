@@ -49,6 +49,9 @@ export default{
     margin-top: 1.5%;
     grid-template-columns: 1fr 4fr repeat(2, 0.7fr);
     grid-template-rows: repeat(2, 1fr);
+    margin-left: auto;
+    margin-right: auto;
+    width: $large-width;
     &__image{
         margin-left: 5%;
         margin-top: 5%;
