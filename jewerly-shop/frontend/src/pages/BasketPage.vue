@@ -72,6 +72,9 @@ export default{
     display: grid;
     margin-top: 5%;
     padding: 2% 2% 0 2%;
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(#{$large-width} - 4%);
     background: $light-pink;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: repeat(3, 1fr);

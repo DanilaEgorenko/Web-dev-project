@@ -15,3 +15,9 @@ export default {
   components: { FooterComponent, HeaderComponent }
 }
 </script>
+
+<style>
+main {
+  min-height: calc(100vh - 516px);
+}
+</style>

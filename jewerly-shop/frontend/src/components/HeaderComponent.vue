@@ -1,6 +1,8 @@
 <template>
     <header class='header'>
-        <img src='@/assets/img/logo.png' class='header__logo' alt="logo">
+        <router-link class='header__logo-link' k to="/">
+            <img src='@/assets/img/logo.png' class='header__logo-img' alt="logo">
+        </router-link>
         <nav class='header__nav'>
             <ul class='header__nav-list'>
                 <li class='header__nav-item'><a href='#' class='header__link'>О нас</a></li>
@@ -11,12 +13,12 @@
         </nav>
         <ul class='header__btn-list'>
             <li class='header__btn-item'>
-                <button class='button button--icon'>
+                <router-link class='button button--icon' to="/signin">
                     <img src='@/assets/img/profile-icon.svg' alt="profile-icon">
-                </button>
+                </router-link>
             </li>
             <li class='header__btn-item'>
-                <router-link class='button button--icon' to="basket">
+                <router-link class='button button--icon' to="/basket">
                     <img src='@/assets/img/shopping-card-icon.svg' alt="shopping-cart-icon">
                 </router-link>
             </li>
@@ -67,6 +69,14 @@ export default {
     &__link {
         text-decoration: none;
         color: $main-dark-text;
+    }
+
+    &__logo-link {
+
+    }
+
+    &__logo-img {
+        height: 100%;
     }
 }
 </style>
