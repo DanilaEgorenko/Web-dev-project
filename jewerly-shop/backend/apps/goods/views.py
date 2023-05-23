@@ -6,7 +6,7 @@ from rest_framework import status
 
 class GoodViewSet(ModelViewSet):
     """
-    List all snippets, or create a new snippet.
+    Just anything that can be sold in jewerly shop
     """
     queryset = Good.objects.all()
     serializer_class = GoodSerializer
