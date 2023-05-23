@@ -1,6 +1,6 @@
 import MainPage from '@/pages/MainPage'
 import SignInPage from '@/pages/SignInPage'
-import BasketPage from '@/pages/BasketPage'
+import CartPage from '@/pages/CartPage'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -18,9 +18,9 @@ const routes = [
     component: SignInPage,
   },
   {
-    path: '/basket',
-    name: 'basket',
-    component: BasketPage,
+    path: '/cart',
+    name: 'cart',
+    component: CartPage,
   },
 ]
 
