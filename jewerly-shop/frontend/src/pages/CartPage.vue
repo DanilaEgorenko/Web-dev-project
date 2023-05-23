@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import ProductComponent from '@/components/ProductComponent.vue';
+import BuyProductComponent from '@/components/BuyProductComponent.vue';
 export default{
     name: 'cart-page',
     data() {
@@ -60,7 +60,7 @@ export default{
         }
     },
     components: {
-        ProductComponent,
+        BuyProductComponent,
     }
 }
 </script>
