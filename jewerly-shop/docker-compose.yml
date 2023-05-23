@@ -8,6 +8,8 @@ services:
             - 8000:8000
         volumes:
             - ./backend:/root/server
+        depends_on:
+            - redis
     frontend:
         build: frontend
         command: npm run serve
@@ -16,3 +18,30 @@ services:
         volumes:
             - ./frontend:/app
             - /app/node_modules
+    redis:
+        image: redis:6.2-alpine
+        restart: always
+        ports:
+            - '6379:6379'
+        command: redis-server --save 20 1 --loglevel warning
+        volumes: 
+            - cache:/data
+    mailhog:
+        image: mailhog/mailhog
+        ports:
+            - '8025:8025'
+        logging:
+            driver: none
+    celery:
+        restart: always
+        build:
+            context: ./backend
+        command: celery -A apps.goods worker --loglevel=info
+        volumes:
+            - ./backend:/app
+        depends_on:
+            - backend
+            - redis
+volumes:
+  cache:
+    driver: local
