@@ -1,25 +1,26 @@
 <template>
-    <main class="bascket-page">
+    <main class="cart-page">
         <product-component 
             v-for="product in products" 
             v-bind:key="product.id"
             v-bind:product="product"
             @add-count="AddCount"
             @reduce-count="ReduceCount"
+            @delete-product="DeleteProduct"
         />
-        <div class="bascket-page__bascket-footer bascket-footer">
-            <p class="bascket-footer__description">
+        <div class="cart-page__cart-footer cart-footer">
+            <p class="cart-footer__description">
                 Текст Текст Текст Текст Текст Текст Текст Текст Текст 
                 Текст Текст Текст Текст Текст Текст Текст Текст Текст 
                 Текст Текст Текст Текст Текст Текст Текст Текст Текст 
                 Текст Текст Текст Текст Текст Текст Текст Текст Текст 
             </p>
-            <div class="bascket-footer__promocode">
-                <label class="bascket-footer__label-promocode" for="promocode">Введите промокод</label>
-                <input class="bascket-footer__input-promocode" id="promocode" type="text">
+            <div class="cart-footer__promocode">
+                <label class="cart-footer__label-promocode" for="promocode">Введите промокод</label>
+                <input class="cart-footer__input-promocode" id="promocode" type="text">
             </div>
-            <h2 class="bascket-footer__amount"><span>Итого</span> <span>{{ total_amount }}</span></h2>
-            <button class="bascket-footer__pay">Оплатить</button>
+            <h2 class="cart-footer__amount"><span>Итого</span> <span>{{ total_amount }}</span></h2>
+            <button class="cart-footer__pay">Оплатить</button>
         </div>
     </main>
 </template>
@@ -27,14 +28,14 @@
 <script>
 import ProductComponent from '@/components/ProductComponent.vue';
 export default{
-    name: 'basket-page',
+    name: 'cart-page',
     data() {
         return {
             products: [
                 {id: 1, title: 'Заголовок', description: 'Текст Текст Текст Текст Текст Текст Текст Текст', 
-                    price: 9999, count: 1, src: 'aerrings-cross-shaped.png'},
+                    price: 9999, count: 1, src: 'https://egelge.com/upload/images/50563_465455_05.jpg'},
                 {id: 2, title: 'Заголовок', description: 'Текст Текст Текст Текст Текст Текст Текст Текст', 
-                    price: 9999, count: 1, src: 'aerrings-cross-shaped.png'},
+                    price: 9999, count: 1, src: 'https://egelge.com/upload/images/50563_465455_05.jpg'},
             ],
         }
     }, 
@@ -49,10 +50,13 @@ export default{
     },
     methods: {
         AddCount(id) {
-            this.products.find(x => x.id == id).count += 1
+            this.products.find(x => x.id == id).count += 1;
         },
         ReduceCount(id) {
-            this.products.find(x => x.id == id).count -= 1
+            this.products.find(x => x.id == id).count -= 1;
+        },
+        DeleteProduct(id) {
+            this.products.pop(this.products.find(x => x.id == id));
         }
     },
     components: {
@@ -65,10 +69,10 @@ export default{
 @import '@/assets/scss/variables';
 
 
-.bascket-page{
+.cart-page{
     margin: 50px 3% 0 3%;
 }
-.bascket-footer{
+.cart-footer{
     display: grid;
     margin-top: 5%;
     padding: 2% 2% 0 2%;

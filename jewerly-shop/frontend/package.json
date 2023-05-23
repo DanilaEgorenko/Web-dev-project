@@ -34,9 +34,6 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
     "rules": {}
   },
   "browserslist": [
