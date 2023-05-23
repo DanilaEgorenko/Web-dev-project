@@ -1,18 +1,18 @@
 <template>
     <div class="product-element">
         <!-- <input class="product-element__checkbox" type="checkbox" checked> -->
-        <img class="product-element__image" v-bind:src="product.src" alt="Картинка товара">
-        <h3 class="product-element__title">{{ product.title }}</h3>
-        <p class="product-element__description">{{ product.description }}</p>
+        <img class="product-element__image" v-bind:src="buyProduct.src" alt="Картинка товара">
+        <h3 class="product-element__title">{{ buyProduct.title }}</h3>
+        <p class="product-element__description">{{ buyProduct.description }}</p>
         <div class="product-element__counter">
             <button class="product-element__button" @click="reduceCount">-</button>
-            <p class="product-element__count">{{ product.count }}</p>
+            <p class="product-element__count">{{ buyProduct.count }}</p>
             <button class="product-element__button" @click="addCount">+</button>
         </div>
         
         <p class="product-element__sum">{{ price_sum }} ₽</p>
         <delete-product-modal 
-            v-bind:product="product"
+            v-bind:buyProduct="buyProduct"
             v-show="isVisibleModal"
             @close="closeModal"
             @delete="deleteProduct"/>
@@ -24,7 +24,7 @@ import DeleteProductModal from './DeleteProductModal.vue';
 export default{
     name: 'product-component',
     props: {
-        product: Object,
+        buyProduct: Object,
     },
     data() {
         return {
@@ -33,16 +33,16 @@ export default{
     },
     computed:{
         price_sum: function () {
-            return this.product.count * this.product.price;
+            return this.buyProduct.count * this.buyProduct.price;
         }
     },
     methods: {
         addCount(){
-            this.$emit('add-count', this.product.id);
+            this.$emit('add-count', this.buyProduct.id);
         },
         reduceCount(){
-            if (this.product.count - 1 != 0){
-                this.$emit('reduce-count', this.product.id);
+            if (this.buyProduct.count - 1 != 0){
+                this.$emit('reduce-count', this.buyProduct.id);
             }
             else {
                 this.isVisibleModal = !this.isVisibleModal;
@@ -52,7 +52,7 @@ export default{
             this.isVisibleModal = !this.isVisibleModal;
         },
         deleteProduct() {
-            this.$emit('delete-product', this.product.id)
+            this.$emit('delete-product', this.buyProduct.id)
             this.closeModal();
         }
     },
@@ -62,7 +62,7 @@ export default{
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/assets/scss/variables';
 
 .product-element{
