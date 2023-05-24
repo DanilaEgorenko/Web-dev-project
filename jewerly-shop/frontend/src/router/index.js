@@ -1,6 +1,7 @@
 import MainPage from '@/pages/MainPage'
 import SignInPage from '@/pages/SignInPage'
 import CartPage from '@/pages/CartPage'
+import CatalogPage from '@/pages/CatalogPage'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/cart',
     name: 'cart',
     component: CartPage,
+  },
+  {
+    path: '/catalog',
+    name: 'catalog',
+    component: CatalogPage,
   },
 ]
 
