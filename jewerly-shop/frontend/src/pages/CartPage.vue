@@ -1,6 +1,6 @@
 <template>
     <main class="cart-page">
-        <buy-product-component 
+        <product-component 
             v-for="buyProduct in buyProducts" 
             v-bind:key="buyProduct.id"
             v-bind:buyProduct="buyProduct"
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import BuyProductComponent from '@/components/BuyProductComponent.vue';
+import ProductComponent from '@/components/ProductComponent.vue';
 export default{
     name: 'cart-page',
     data() {
@@ -60,7 +60,7 @@ export default{
         }
     },
     components: {
-        BuyProductComponent,
+        ProductComponent,
     }
 }
 </script>
