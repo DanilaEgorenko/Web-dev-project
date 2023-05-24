@@ -219,18 +219,6 @@ export default {
         displayedProducts() {
             let filteredProducts = this.products;
 
-            if (this.selectedColors.length > 0) {
-                filteredProducts = filteredProducts.filter(product => {
-                    return this.selectedColors.includes(product.color);
-                });
-            }
-
-            if (this.selectedBrands.length > 0) {
-                filteredProducts = filteredProducts.filter(product => {
-                    return this.selectedBrands.includes(product.brand);
-                });
-            }
-
             if (this.selectedCategory !== 'all') {
                 filteredProducts = this.products.filter(product => product.category === this.selectedCategory);
             }
@@ -250,9 +238,17 @@ export default {
             const startIndex = (this.currentPage - 1) * this.pageSize;
             const endIndex = startIndex + this.pageSize;
 
-            // if (filteredProducts.length > 0){
-            //     this.isContentFound = false
-            // }
+            if (this.selectedColors.length > 0) {
+                filteredProducts = filteredProducts.filter(product => {
+                    return this.selectedColors.includes(product.color);
+                });
+            }
+
+            if (this.selectedBrands.length > 0) {
+                filteredProducts = filteredProducts.filter(product => {
+                    return this.selectedBrands.includes(product.brand);
+                });
+            }
 
             return filteredProducts.slice(startIndex, endIndex);
         },
