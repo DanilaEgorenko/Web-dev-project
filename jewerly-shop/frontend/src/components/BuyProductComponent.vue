@@ -16,7 +16,7 @@
 
 <script>
 export default{
-    name: 'buyProduct-component',
+    name: 'buy-product-component',
     props: {
         buyProduct: Object,
     },

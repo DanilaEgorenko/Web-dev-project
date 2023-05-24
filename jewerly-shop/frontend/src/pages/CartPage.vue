@@ -1,6 +1,6 @@
 <template>
     <main class="cart-page">
-        <product-component 
+        <buy-product-component 
             v-for="buyProduct in buyProducts" 
             v-bind:key="buyProduct.id"
             v-bind:buyProduct="buyProduct"
