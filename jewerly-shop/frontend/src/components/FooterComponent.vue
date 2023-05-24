@@ -175,5 +175,24 @@ export default {
     &__contacts-number::before {
         background-image: url('@/assets/img/phone-icon.svg');
     }
+
+    @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    width: 100%;
+
+    &__list {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    &__list:nth-child(2n) {
+        flex-grow: 0;
+        margin-top: 20px;
+    }
 }
+}
+
+
 </style>
