@@ -18,11 +18,7 @@
                 </router-link>
             </li>
             <li class='header__btn-item'>
-<<<<<<< HEAD
-                <router-link class='button button--icon' to="/basket">
-=======
                 <router-link class='button button--icon' to="cart">
->>>>>>> cbb8599 (Add the BEST MODAL WINDOW)
                     <img src='@/assets/img/shopping-card-icon.svg' alt="shopping-cart-icon">
                 </router-link>
             </li>
