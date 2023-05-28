@@ -1,9 +1,10 @@
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from .models import Good
-from . serializers import GoodSerializer
+from .serializers import GoodSerializer
 from rest_framework import status
 from .celery import add, get_celery_worker_status
+
 
 class GoodViewSet(ModelViewSet):
     """
@@ -11,7 +12,7 @@ class GoodViewSet(ModelViewSet):
     """
     queryset = Good.objects.all()
     serializer_class = GoodSerializer
-    
+
     def list(self, request, format=None):
         snippets = Good.objects.all()
         serializer = GoodSerializer(snippets, many=True)
