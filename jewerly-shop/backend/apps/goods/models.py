@@ -4,6 +4,7 @@
 
 from django.db import models
 
+
 class Good(models.Model):
     """Модель товара"""
     name = models.CharField(verbose_name="Название", max_length=64)
