@@ -31,12 +31,12 @@ services:
         ports:
             - '8025:8025'
         logging:
-            driver: none
+            driver: json-file
     celery:
         restart: always
         build:
             context: ./backend
-        command: celery -A apps.goods worker --loglevel=info
+        command: celery -A core.celery worker --loglevel=info
         volumes:
             - ./backend:/app
         depends_on:

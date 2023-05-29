@@ -3,7 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 from .models import Good
 from .serializers import GoodSerializer
 from rest_framework import status
-from .celery import add, get_celery_worker_status
+
 
 
 class GoodViewSet(ModelViewSet):
@@ -16,10 +16,7 @@ class GoodViewSet(ModelViewSet):
     def list(self, request, format=None):
         snippets = Good.objects.all()
         serializer = GoodSerializer(snippets, many=True)
-        print(1)
-        # print(get_celery_worker_status())
-        print(2)
-        add.delay(1, 2)
+        
         return Response(serializer.data)
 
     def post(self, request, format=None):
