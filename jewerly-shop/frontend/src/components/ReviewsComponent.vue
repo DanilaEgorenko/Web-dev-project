@@ -1,0 +1,57 @@
+<template>
+    <form class="review-form">
+        <h2 class=review-form__title>Отзывы</h2>
+        <h3 class="review-form__subtitle">Добавьте свой отзыв!</h3>
+        <label class="review-form__label visually-hidden">Текст отзыва</label>
+        <input type="textarea" v-model="text" class='review-form__text-input' placeholder='Ваш отзыв'>
+        <button class="button" @click="submitReview">Отправить отзыв</button>
+    </form>
+</template>
+
+<script>
+const axios = require('axios');
+
+export default {
+    name: 'reviews-component',
+data() {
+return {
+name: '',
+text: '',
+product: '',
+created_at: new Date(),
+rate: 5
+};
+},
+methods: {
+submitReview() {
+// Создайте объект с данными отзыва
+const reviewData = {
+name: 'sanek',
+text: this.text,
+product: "ring",
+created_at: new Date(),
+rate: 5
+
+};
+
+// Отправьте данные на сервер
+axios.post('/reviews/', reviewData)
+.then(response => {
+// Обработайте успешный ответ, если необходимо
+console.log(response.data.message);
+})
+.catch(error => {
+// Обработайте ошибку, если необходимо
+console.error(error);
+});
+}
+}
+};
+</script>
+
+<style lang="scss" scoped>
+@import '@/assets/scss/variables';
+
+$form-height: 450px;
+
+</style>

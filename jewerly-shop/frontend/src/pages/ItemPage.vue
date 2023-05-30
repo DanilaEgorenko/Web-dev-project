@@ -1,15 +1,17 @@
 <template>
     <main>
         <item-card-component/>
+        <reviews-component/>
     </main>
 </template>
 
 <script>
 import ItemCardComponent from '@/components/ItemCardComponent.vue';
+import ReviewsComponent from '@/components/ReviewsComponent.vue';
 
 export default {
     name: "item-page",
-    components: { ItemCardComponent }
+    components: { ItemCardComponent, ReviewsComponent }
 }
 </script>
 
