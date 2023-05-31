@@ -17,3 +17,7 @@ class GetOrderSerializer(serializers.Serializer):
     class Meta:
         model = Order
         fields = ["id", "user_id", "goods_list"]
+        
+class CTASerrializer(serializers.Serializer):
+    email = serializers.CharField()
+    name = serializers.CharField()

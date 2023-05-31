@@ -1,19 +1,50 @@
 <template>
-    <form class="lead-form" action="">
+    <form class="lead-form" method='get'>
         <img class='lead-form__img' src="@/assets/img/heart-shaped-pendants.png" alt="heart-shaped-pendants">
         <h2 class=lead-form__title>Остались вопросы?</h2>
         <p class="lead-form__subtitle">Мы свяжемся с вами лично!</p>
         <label for="lead-form-email">Ваша почта</label>
-        <input name="email" type="email" id="lead-form-email" class='lead-form__text-input' placeholder='Ваша почта'>
+        <input v-model='email' name="email" type="email" id="lead-form-email" class='lead-form__text-input' placeholder='Ваша почта'>
         <label for="lead-form-name">Ваше имя</label>
-        <input type="text" name="name" id="lead-form-name" class='lead-form__text-input' placeholder='Ваше имя'>
-        <input type="submit" value="Оставить заявку" class="lead-form__submit button">
+        <input type="text" v-model='name' name="name" id="lead-form-name" class='lead-form__text-input' placeholder='Ваше имя'>
+        <input type="input" value="Оставить заявку" class="lead-form__submit button" v-on:click='sendCta()'>
     </form>
 </template>
 
 <script>
 export default {
-    name: 'lead-form-component'
+    name: 'lead-form-component',
+    data() {
+        return {
+            email: '',
+            name: ''
+        }
+    },
+    methods: {
+        sendCta() {
+            if (!this.email && !this.name) {
+                console.log(this.email)
+                return
+            }
+            const data = {
+                'email': this.email,
+                'name': this.name
+            }
+            fetch('http://localhost:8000/api/cta/', {
+                method: 'post', 
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then(response => response.json())
+            .then(
+                data => {
+                    console.log(data);
+                }
+            )
+        }
+    }
 }
 </script>
 

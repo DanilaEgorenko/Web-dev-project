@@ -42,6 +42,7 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'django_celery_beat',
 ]
 
 LOCAL_APPS = [  
@@ -65,6 +66,8 @@ MIDDLEWARE = [
 
 ALLOWED_HOSTS=['*']
 CORS_ORIGIN_ALLOW_ALL = True
+
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 ROOT_URLCONF = 'core.urls'
 
