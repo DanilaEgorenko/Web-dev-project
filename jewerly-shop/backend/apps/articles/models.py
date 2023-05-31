@@ -5,8 +5,8 @@
 from django.db import models
 
 class Article(models.Model):
-    """Модель товара"""
-    title = models.CharField(verbose_name="Название")
+    """Модель статьи"""
+    title = models.CharField(verbose_name="Название", max_length=60)
     description = models.TextField(verbose_name="Название")
     create_date = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
     change_date = models.DateTimeField(verbose_name="Дата изменения", auto_now=True)
@@ -17,3 +17,4 @@ class Article(models.Model):
 
     def __str__(self):
         return str(self.title)
+ 
