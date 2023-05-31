@@ -11,6 +11,7 @@ class Good(models.Model):
     price = models.DecimalField(verbose_name="Цена", max_digits=9, decimal_places=2, default=0.00)
     material = models.CharField(verbose_name="Материал", max_length=32, default="Silver")
     img = models.ImageField(verbose_name="Изоюражение", max_length=9999, default=None, null=True, upload_to ='static/img/')
+    brand = models.CharField(verbose_name='Брэнд', max_length=32)
     color = models.CharField(verbose_name="Цвет", max_length=32, default="Серый")
     category = None
 

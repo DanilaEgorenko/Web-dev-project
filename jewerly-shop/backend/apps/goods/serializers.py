@@ -18,4 +18,5 @@ class GoodSerializer(serializers.Serializer):
         fields = ('title', 'price', 'src', 'category', 'material', 'color')
 
     def get_image_url(self, obj):
-        return obj.img.url
+        result = obj.img.url[7:]
+        return result
