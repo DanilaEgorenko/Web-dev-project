@@ -1,4 +1,4 @@
-amqp==5.1.1
+﻿amqp==5.1.1
 asgiref==3.6.0
 astroid==2.15.5
 billiard==3.6.4.0
@@ -26,6 +26,7 @@ lazy-object-proxy==1.9.0
 MarkupSafe==2.1.2
 mccabe==0.7.0
 packaging==23.1
+Pillow==9.5.0
 platformdirs==3.5.1
 prompt-toolkit==3.0.38
 PyJWT==1.7.1
