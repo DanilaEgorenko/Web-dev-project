@@ -49,7 +49,6 @@ LOCAL_APPS = [
     'apps.goods',
     'apps.orders',
     'apps.users',
-    'apps.articles',
     'apps.reviews'
 ]
 
@@ -60,10 +59,10 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ALLOWED_HOSTS=['*']
@@ -148,6 +147,12 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8080',
+    'http://127.0.0.1:8080',
+]
 
 EMAIL_USE_TLS = False
 EMAIL_HOST = 'mailhog'

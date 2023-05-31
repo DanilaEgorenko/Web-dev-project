@@ -32,6 +32,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/auth/', include(auth_urls)),
+    path('api/reviews/', include('apps.reviews.urls')),
     path(
     'swagger-ui/',
     TemplateView.as_view(
