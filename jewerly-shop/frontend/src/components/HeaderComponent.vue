@@ -6,7 +6,7 @@
         <nav class='header__nav'>
             <ul class='header__nav-list'>
                 <li class='header__nav-item'><a href='#' class='header__link'>О нас</a></li>
-                <li class='header__nav-item'><a href='#' class='header__link'>Магазины</a></li>
+                <li class='header__nav-item'><router-link to='/catalog' class='header__link'>Каталог</router-link></li>
                 <li class='header__nav-item'><a href='#' class='header__link'>Контакты</a></li>
                 <li class='header__nav-item'><a href='#' class='header__link'>Доставка и возврат</a></li>
             </ul>

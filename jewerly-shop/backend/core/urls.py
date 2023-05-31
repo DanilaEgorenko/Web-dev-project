@@ -23,6 +23,8 @@ from drf_yasg import openapi
 from rest_framework import permissions
 from django.views.generic import TemplateView
 from django.urls import re_path
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 schema_view = get_schema_view(  # new
@@ -58,3 +60,5 @@ urlpatterns = [
         schema_view.without_ui(cache_timeout=0),
         name='schema-json'),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

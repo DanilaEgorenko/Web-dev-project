@@ -1,6 +1,6 @@
 <template>
     <div class="product-element">
-        <img class="product-element__image" v-bind:src="product.src" alt="Картинка товара">
+        <img class="product-element__image" v-bind:src="'http://127.0.0.1:8000' + product.src" alt="Картинка товара">
         <div class="product-element__title-and-price">
             <h4 class="product-element__title">{{ product.title }}</h4>
             <p class="product-element__price">{{ product.price }} &#8381;</p>

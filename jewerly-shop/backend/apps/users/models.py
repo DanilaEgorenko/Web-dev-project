@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from .manager import UserManager
+from django.core.mail import send_mail
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -48,3 +49,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         }, settings.SECRET_KEY, algorithm='HS256')
 
         return token.decode('utf-8')
+
+    def send_mail(self, subject, message):
+        """
+        Отправляет письмо с переданной темой и текстом
+        """
+        send_mail(subject, message, from_email="1@mail.ru", recipient_list=["2@mail.ru"])

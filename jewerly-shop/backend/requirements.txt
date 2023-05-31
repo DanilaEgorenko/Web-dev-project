@@ -1,4 +1,4 @@
-amqp==5.1.1
+﻿amqp==5.1.1
 asgiref==3.6.0
 astroid==2.15.5
 billiard==3.6.4.0
@@ -14,6 +14,7 @@ coreapi==2.3.3
 coreschema==0.0.4
 dill==0.3.6
 Django==4.2.1
+django-cors-headers==4.0.0
 djangorestframework==3.14.0
 drf-yasg==1.21.5
 idna==3.4
@@ -26,6 +27,7 @@ lazy-object-proxy==1.9.0
 MarkupSafe==2.1.2
 mccabe==0.7.0
 packaging==23.1
+Pillow==9.5.0
 platformdirs==3.5.1
 prompt-toolkit==3.0.38
 PyJWT==1.7.1

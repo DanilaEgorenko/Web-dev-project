@@ -183,26 +183,7 @@ export default {
     name: 'catalog-page',
     data() {
         return {
-            products: [
-                {id: 1, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'grey', material: 'silver', category: 'necklaces', src: 'https://egelge.com/upload/images/small/28163_2040_09.jpg'},
-                {id: 2, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'grey', material: 'silver', category: 'rings', src: 'https://egelge.com/upload/images/small/22115_890509_09.jpg'},
-                {id: 3, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'yellow', material: 'gold', category: 'earrings', src: 'https://egelge.com/upload/images/small/84757_147133_09.jpg'},
-                {id: 4, title: 'Товар', price: 99999, brand: 'Tiffany & Co.', color: 'yellow', material: 'gold', category: 'earrings', src: 'https://egelge.com/upload/images/small/84757_147133_09.jpg'},
-                {id: 5, title: 'Товар', price: 99999, brand: 'Tiffany & Co.', color: 'yellow', material: 'gold', category: 'rings', src: 'https://egelge.com/upload/images/small/11466_942243_09.jpg'},
-                {id: 6, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'grey', material: 'silver', category: 'necklaces', src: 'https://egelge.com/upload/images/small/28163_2040_09.jpg'},
-                {id: 7, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'grey', material: 'silver', category: 'rings', src: 'https://egelge.com/upload/images/small/22115_890509_09.jpg'},
-                {id: 8, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'grey', material: 'silver', category: 'necklaces', src: 'https://egelge.com/upload/images/small/28163_2040_09.jpg'},
-                {id: 9, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'grey', material: 'silver', category: 'necklaces', src: 'https://egelge.com/upload/images/small/28163_2040_09.jpg'},
-                {id: 10, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'grey', material: 'silver', category: 'rings', src: 'https://egelge.com/upload/images/small/22115_890509_09.jpg'},
-                {id: 11, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'yellow', material: 'gold', category: 'earrings', src: 'https://egelge.com/upload/images/small/84757_147133_09.jpg'},
-                {id: 12, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'yellow', material: 'gold', category: 'earrings', src: 'https://egelge.com/upload/images/small/84757_147133_09.jpg'},
-                {id: 13, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'yellow', material: 'gold', category: 'rings', src: 'https://egelge.com/upload/images/small/11466_942243_09.jpg'},
-                {id: 14, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'grey', material: 'silver', category: 'necklaces', src: 'https://egelge.com/upload/images/small/28163_2040_09.jpg'},
-                {id: 15, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'grey', material: 'silver', category: 'rings', src: 'https://egelge.com/upload/images/small/22115_890509_09.jpg'},
-                {id: 16, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'grey', material: 'silver', category: 'necklaces', src: 'https://egelge.com/upload/images/small/28163_2040_09.jpg'},
-                {id: 17, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'grey', material: 'silver', category: 'rings', src: 'https://egelge.com/upload/images/small/22115_890509_09.jpg'},
-                {id: 18, title: 'Товар', price: 9999, brand: 'SOKOLOV', color: 'grey', material: 'silver', category: 'necklaces', src: 'https://egelge.com/upload/images/small/28163_2040_09.jpg'},
-            ],
+            products: [],
             currentPage: 1,
             pageSize: 6,
             selectedCategory: 'all',
@@ -307,6 +288,13 @@ export default {
         filterByBrand(){
             this.currentPage = 1;
         },
+    },
+    mounted() {
+        fetch("http://127.0.0.1:8000/api/goods/")
+            .then(response => response.json())
+            .then(data => {
+                this.products = data
+            });
     },
     components: {
         BannerComponent,

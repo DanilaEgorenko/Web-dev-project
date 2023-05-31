@@ -3,8 +3,8 @@ from .models import Good
 
 
 class GoodsAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'category', 'alloy')
-    list_display_links = ('name', 'price')
+    list_display = ('title', 'price', 'category')
+    list_display_links = ('title', 'price')
 
 
 admin.site.register(Good, GoodsAdmin)

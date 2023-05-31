@@ -3,9 +3,8 @@ from celery import Celery, shared_task
 app = Celery('tasks', broker='redis://redis:6379/0')
 
 @shared_task
-def add(x, y):
+def add():
     print("hi")
-    return x + y
 
 def get_celery_worker_status():
     i = app.control.inspect()
