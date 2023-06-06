@@ -21,7 +21,6 @@ schema_view = get_schema_view(  # new
         contact=openapi.Contact(email="contact@snippets.local"),
         license=openapi.License(name="BSD License"),
     ),
-    # url=f'{settings.APP_URL}/api/v3/',
     patterns=[
         path('api/', include(router.urls)),
     ],

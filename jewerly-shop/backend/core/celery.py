@@ -25,13 +25,13 @@ def adv_mail():
     except Exception as e:
         print(e)
     
-app.conf.beat_schedule = {
-    'add-every-10-seconds': {
-        'task': 'core.celery.adv_mail',
-        'schedule': 10.0,
-    },
-}
-app.conf.timezone = 'UTC'
+# app.conf.beat_schedule = {
+#     'add-every-10-seconds': {
+#         'task': 'core.celery.adv_mail',
+#         'schedule': 10.0,
+#     },
+# }
+# app.conf.timezone = 'UTC'
 
 def get_celery_worker_status():
     i = app.control.inspect()
