@@ -29,8 +29,10 @@ class OrderViewSet(ModelViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class CTAViewSet(ModelViewSet):
-    queryset = None
     serializer_class = CTASerrializer
+    
+    def get_queryset(self):
+        return None
 
     def list(self, request):
         return Response(data={'error':'get is not allowed'})
