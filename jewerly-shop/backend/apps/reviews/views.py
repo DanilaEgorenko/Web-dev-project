@@ -11,18 +11,15 @@ from django.http import JsonResponse
 
 class ReviewCreateView(APIView):
     def post(self, request):
-        user_data = json.loads(request.data.get('user_id'))
-        text = request.data.get('text')
-        product_data = json.loads(request.data.get('good_id'))
-        date = request.data.get('date')
-        rating = request.data.get('rating')
-
-        product_id = product_data[0]['pk']
-        user_id = user_data[0]['pk']
+        text = request.data['text']
+        date = request.data['created_at']
+        rating = request.data['rate']
+        product_id = request.data['good_id']
+        user_id = request.data['user_id']
 
         product = Good.objects.get(pk=product_id)
 
-        review = Reviews.objects.create(username_id=user_id, text=text, product=product, created_at=date, rate=rating)
+        Reviews.objects.create(username_id=user_id, text=text, product=product, created_at=date, rate=rating)
 
         return Response({'message': 'Отзыв успешно создан'})
 
