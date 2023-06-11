@@ -6,13 +6,13 @@ from .models import Article
 from .serializers import ArticleSerializer
 
 
-class OrderViewSet(ModelViewSet):
+class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
     def list(self, request, format=None):
-        snippets = Article.objects.all()
-        serializer = ArticleSerializer(snippets, many=True)
+        queryset = Article.objects.all()
+        serializer = ArticleSerializer(data=queryset, many=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
