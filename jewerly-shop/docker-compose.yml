@@ -10,14 +10,14 @@ services:
             - ./backend:/root/server
         depends_on:
             - redis
-    # frontend:
-    #     build: frontend
-    #     command: npm run serve
-    #     ports:
-    #         - 8080:8080
-    #     volumes:
-    #         - ./frontend:/app
-    #         - /app/node_modules
+    frontend:
+        build: frontend
+        command: npm run serve
+        ports:
+            - 8080:8080
+        volumes:
+            - ./frontend:/app
+            - /app/node_modules
     centrifugo:
         container_name: centrifugo
         image: centrifugo/centrifugo:v4
