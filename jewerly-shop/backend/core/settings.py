@@ -24,7 +24,8 @@ SECRET_KEY = 'django-insecure-h=8q%agz4lhl67^+1ag=p$70@34p8nd3pzk&#ahb%)dkx2av#w
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS=['*']
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Application definition
@@ -58,18 +59,15 @@ LOCAL_APPS = [
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-ALLOWED_HOSTS=['*']
-CORS_ORIGIN_ALLOW_ALL = True
 
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 

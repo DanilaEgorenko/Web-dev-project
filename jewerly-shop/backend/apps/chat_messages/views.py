@@ -13,16 +13,21 @@ class MessageViewSet(ModelViewSet):
     queryset = Message.objects.all()
 
     def list(self, request, format=None):
-        if request.GET['chat_id'] is None:
+        chat_id = request.GET.get('chat_id', None)
+        if chat_id == None:
             data = {
-                "details": "Chat Id is required"
+                "details": "Chat id is required"
             }
             return Response(data=data, status=status.HTTP_200_OK)
         
-        chat_id = request.GET['chat_id']
-        serializer = self.serializer_class
         queryset = Message.objects.filter(chat_id=chat_id)
-        data = serializer(queryset, many=True).data
+        serializer = self.serializer_class(queryset, many=True)
+        data = serializer.data
+        
+        if not data:
+            data = {
+                "details": "Chat is empty"
+            }
             
         return Response(data=data, status=status.HTTP_200_OK)
 
@@ -39,4 +44,5 @@ class MessageViewSet(ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -3,6 +3,7 @@ import SignInPage from '@/pages/SignInPage'
 import CartPage from '@/pages/CartPage'
 import CatalogPage from '@/pages/CatalogPage'
 import ItemPage from '@/pages/ItemPage'
+import ChatComponent from '@/components/ChatComponent'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -34,6 +35,11 @@ const routes = [
     name: 'item',
     component: ItemPage,
   },
+  {
+    path: '/chat/:id',
+    name: 'chat',
+    component: ChatComponent,
+  }
 ]
 
 const router = new VueRouter({
