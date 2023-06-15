@@ -43,6 +43,7 @@ THIRD_PARTY_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'django_celery_beat',
+    'social_django',
 ]
 
 LOCAL_APPS = [  
@@ -158,3 +159,21 @@ CORS_ORIGIN_WHITELIST = [
 EMAIL_USE_TLS = False
 EMAIL_HOST = 'mailhog'
 EMAIL_PORT = 1025
+
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',
+]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '96916330062-ns01dqb4577fid2jmm0it5mkqcmk43sl.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'FvfH5sUWJs_BJq6FZEUEBGpj'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'profile',
+    'email',
+]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = [
+    ('name', 'name'),
+    ('email', 'email'),
+]
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
