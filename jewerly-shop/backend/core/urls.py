@@ -1,3 +1,4 @@
+from . import views
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import urls as auth_urls
@@ -47,3 +48,11 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+from django.urls import path, include
+
+urlpatterns = [
+    path('social-auth/', include('social_django.urls', namespace='social')),
+    path('', views.my_view),
+    path('logout/', views.out, name='logout'),
+]
