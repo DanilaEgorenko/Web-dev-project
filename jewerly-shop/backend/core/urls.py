@@ -50,7 +50,7 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 from django.urls import path, include
 
-urlpatterns = [
+urlpatterns += [
     path('social-auth/', include('social_django.urls', namespace='social')),
     path('', views.my_view),
     path('logout/', views.out, name='logout'),
