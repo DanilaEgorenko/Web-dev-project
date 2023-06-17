@@ -1,7 +1,8 @@
 <template>
-    <ul>
-        <li v-for='message in messages' v-bind:key="message">
-            {{ message }}
+    <ul class='messages'>
+        <li class='message-box' v-for='message in messages' v-bind:key="message">
+            <p>{{ message.user }}</p>
+            <p>{{ message.text }}</p>
         </li>
     </ul>
 </template>
@@ -38,3 +39,24 @@ export default {
     }
 }
 </script>
+
+<style lang='scss'>
+@import '@/assets/scss/variables';
+
+.messages {
+    margin-left: auto;
+    margin-right: auto;
+    width: $large-width;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.message-box {
+    background-color: grey;
+    border-radius: 15px;
+    display: block;
+    width: fit-content;
+    max-width: 300px;
+    padding: 10px;
+}
+</style>
