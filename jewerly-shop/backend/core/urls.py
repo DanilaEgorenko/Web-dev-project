@@ -29,6 +29,7 @@ schema_view = get_schema_view(  # new
 )
 
 urlpatterns = [
+    path('admin/login/', views.MyLoginView.as_view(), name='login'),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/auth/', include(auth_urls)),
@@ -47,8 +48,6 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-from django.urls import path, include
 
 urlpatterns += [
     path('social-auth/', include('social_django.urls', namespace='social')),

@@ -176,4 +176,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = [
     ('name', 'name'),
     ('email', 'email'),
 ]
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'
+
+LOGIN_REDIRECT_URL = '/admin/'
