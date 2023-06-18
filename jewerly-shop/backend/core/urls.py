@@ -10,9 +10,10 @@ from django.views.generic import TemplateView
 from django.urls import re_path
 from django.conf import settings
 from django.conf.urls.static import static
+from apps.users.views import authenticate_code, get_user
 
 
-schema_view = get_schema_view(  # new
+schema_view = get_schema_view(
     openapi.Info(
         title="Snippets API",
         default_version='v1',
@@ -21,7 +22,6 @@ schema_view = get_schema_view(  # new
         contact=openapi.Contact(email="contact@snippets.local"),
         license=openapi.License(name="BSD License"),
     ),
-    # url=f'{settings.APP_URL}/api/v3/',
     patterns=[
         path('api/', include(router.urls)),
     ],
@@ -49,10 +49,13 @@ urlpatterns = [
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-from django.urls import path, include
-
-urlpatterns = [
-    path('social-auth/', include('social_django.urls', namespace='social')),
+urlpatterns += [
+    # path('social-auth/', include('social_django.urls', namespace='social')),
+    path('google-sign-in/', views.signInWithGoogle, name='google-sign-in'),
+    path('test/', views.read_request, name='test'),
     path('', views.my_view),
     path('logout/', views.out, name='logout'),
+    path('frontend/', views.frontend, name='frontend'),
+    path('api/authenticate-code/', authenticate_code, name='authenticate-code'),
+    path('api/get_user/', get_user, name='get-user')
 ]

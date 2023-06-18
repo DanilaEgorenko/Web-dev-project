@@ -13,10 +13,43 @@ import BannerComponent from '@/components/BannerComponent.vue';
 import RecentlyBoughtComponent from '@/components/RecentlyBoughtComponent.vue';
 import ShortCatalogComponent from '@/components/ShortCatalogComponent.vue'
 import LeadFormComponent from '@/components/LeadFormComponent.vue';
+import Cookies from "js-cookie";
 
 export default {
     name: "main-page",
-    components: { BannerComponent, RecentlyBoughtComponent, ShortCatalogComponent, LeadFormComponent }
+    components: { BannerComponent, RecentlyBoughtComponent, ShortCatalogComponent, LeadFormComponent },
+    mounted() {
+        const auth_code = this.$route.query.code;
+        if (auth_code !== undefined) {
+            this.validate_code(auth_code);
+        }
+    },
+    methods: {
+        validate_code(code) {
+            const data = {
+                'code': code,
+            }
+
+            fetch(this.$api + 'authenticate-code/', {
+                method: 'post',
+                body: JSON.stringify(data),
+                headers: {
+                    'content-type': 'application/json'
+                },
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.token !== undefined) {
+                    Cookies.set('jwt', data.token);
+                    this.$root.$emit('loginWithJWT');
+                }
+                location.href = '/';
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
+    }
 }
 </script>
 
