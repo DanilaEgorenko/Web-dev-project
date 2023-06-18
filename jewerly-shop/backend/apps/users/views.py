@@ -13,13 +13,25 @@ class UserSerializer(ModelSerializer):
 @api_view(['GET'])
 def get_user(request):
     user = request.user
+    token = Oauth.objects.filter(user=user).last()
+    access_token = token.access_token
     
     email = user.email
     username = user.username
+
+    profile_api_url = "https://www.googleapis.com/userinfo/v2/me"
+    headers = {
+        "Authorization": "Bearer " + access_token
+    }
+    
+    response = requests.get(profile_api_url, headers=headers)
+    data = response.json()
+    picture = data.get('picture')
     
     return Response(data={
         "email": email,
-        "username": username
+        "username": username,
+        "picture": picture
     })
     
 

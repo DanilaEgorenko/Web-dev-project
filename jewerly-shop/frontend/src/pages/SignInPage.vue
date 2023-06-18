@@ -31,6 +31,7 @@
     <div v-else>
       <p>{{ username }}</p>
       <p>{{ email }}</p>
+      <img :src="picture" alt="">
       <input type="button" value='Выйти из аккаунта' @click='logout()'>
     </div>
   </main>
@@ -46,6 +47,7 @@ export default {
       signInMethod: "phone",
       username: localStorage.getItem('username'),
       email: localStorage.getItem('email'),
+      picture: localStorage.getItem('picture'),
     }
   },
   methods: {
@@ -53,7 +55,8 @@ export default {
       Cookies.remove('jwt');
       localStorage.removeItem('username');
       localStorage.removeItem('email');
-      this.$router.push('/');
+      localStorage.removeItem('picture');
+      this.$router.push('/').catch(()=>{});
     }
   }
 }
