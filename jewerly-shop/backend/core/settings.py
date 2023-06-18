@@ -183,6 +183,13 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = [
     ('name', 'name'),
     ('email', 'email'),
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'core.auth_backend.JWTAuthentication',
+    ),
+}
+
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/frontend'
 REDIRECT_FIELD_NAME = 'next'
 ALLOWED_REDIRECT_HOSTS = ['google.com']

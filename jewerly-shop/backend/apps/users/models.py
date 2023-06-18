@@ -48,10 +48,25 @@ class User(AbstractBaseUser, PermissionsMixin):
             'exp': dt.utcfromtimestamp(dt.timestamp()),
         }, settings.SECRET_KEY, algorithm='HS256')
 
-        return token.decode('utf-8')
+        return token
 
     def send_mail(self, subject, message):
         """
         Отправляет письмо с переданной темой и текстом
         """
         send_mail(subject, message, from_email="1@mail.ru", recipient_list=["2@mail.ru"])
+
+
+class GoogleAuthTokens(models.Model):
+    access_token = models.CharField(verbose_name='Access token' ,max_length=1500)
+    id_token = models.CharField(verbose_name='Id token', max_length=500)
+    expires_in = models.IntegerField(verbose_name='Expires in')
+    created_at = models.DateTimeField(verbose_name='Creation date', auto_now_add=True)
+    user = models.ForeignKey(User, verbose_name='User', on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return str(self.pk)
+    
+    class Meta:
+        verbose_name = 'OAuth токен'
+        verbose_name_plural = 'OAuth токены'

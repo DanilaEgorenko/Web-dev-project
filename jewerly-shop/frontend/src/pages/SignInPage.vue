@@ -1,98 +1,61 @@
 <template>
   <main>
-    <form 
-    class="signin" 
-    action="">
+    <form class="signin" action="" v-if="!username">
       <h2>Войти в аккаунт</h2>
-      <div 
-      class="signin__choices">
-        <div 
-        class="signin__choice">
-          <input 
-          type="radio" 
-          id="contactChoice1" 
-          name="signin" 
-          v-model='signInMethod' 
-          value="phone" 
-          checked>
-          <label 
-          for="contactChoice1">
-          Через телефон
-        </label>
+      <div class="signin__choices">
+        <div class="signin__choice">
+          <input type="radio" id="contactChoice1" name="signin" v-model='signInMethod' value="phone" checked>
+          <label for="contactChoice1">Через телефон</label>
         </div>
-        <div 
-        class="signin__choice">
-          <input 
-          type="radio" 
-          id="contactChoice2" 
-          name="signin" 
-          v-model='signInMethod' 
-          value="email">
-          <label 
-          for="contactChoice2">
-          Через email
-        </label>
+        <div class="signin__choice">
+          <input type="radio" id="contactChoice2" name="signin" v-model='signInMethod' value="email">
+          <label for="contactChoice2">Через email</label>
         </div>
       </div>
-      <div 
-      class="signin__form">
-        <input 
-        v-if='signInMethod === "email"' 
-        type="email" 
-        inputmode="email" 
-        placeholder="example@mail.ru">
-        <input 
-        v-else-if='signInMethod === "phone"' 
-        type="phone" 
-        inputmode="tel" 
-        placeholder="+7 (___) ___ __ __">
-        <input 
-        type="password" 
-        placeholder="Введите пароль">
-        <div 
-        class="signin__form-checkbox">
-          <input 
-          type="checkbox" 
-          id="remember_me" 
-          name="remember_me" 
-          checked>
-          <label 
-          for="remember_me">
-          Запомнить меня
-        </label>
+      <div class="signin__form">
+        <input v-if='signInMethod === "email"' type="email" inputmode="email" placeholder="example@mail.ru">
+        <input v-else-if='signInMethod === "phone"' type="phone" inputmode="tel" placeholder="+7 (___) ___ __ __">
+        <input type="password" placeholder="Введите пароль">
+        <div class="signin__form-checkbox">
+          <input type="checkbox" id="remember_me" name="remember_me" checked>
+          <label for="remember_me">Запомнить меня</label>
         </div>
       </div>
-      <div 
-      class="signin__actions">
-        <button 
-        class="signin__actions-button" 
-        type="submit">
-        Войти
-      </button>
-        <a 
-        href="#" 
-        class="signin__actions-forgot">
-        Забыли пароль?
-      </a>
-        <a 
-        href="#" 
-        class="signin__actions-registration">
-        Зарегистрироваться
-      </a>
+      <div class="signin__actions">
+        <button class="signin__actions-button" type="submit">Войти</button>
+        <a href="#" class="signin__actions-forgot">Забыли пароль?</a>
+        <a href="#" class="signin__actions-registration">Зарегистрироваться</a>
       </div>
-    <a class="login-with-google-btn" href='http://localhost:8000/google-sign-in'>Войти через Google</a>
+      <a class="login-with-google-btn" href='http://localhost:8000/google-sign-in'>Войти через Google</a>
     </form>
+    <div v-else>
+      <p>{{ username }}</p>
+      <p>{{ email }}</p>
+      <input type="button" value='Выйти из аккаунта' @click='logout()'>
+    </div>
   </main>
 </template>
 
 <script>
+import Cookies from 'js-cookie';
+
 export default {
   name: 'signin-page',
   data() {
     return {
-      signInMethod: "phone"
+      signInMethod: "phone",
+      username: localStorage.getItem('username'),
+      email: localStorage.getItem('email'),
     }
   },
+  methods: {
+    logout() {
+      Cookies.remove('jwt');
+      localStorage.removeItem('username');
+      localStorage.removeItem('email');
+      this.$router.push('/');
+    }
+  }
 }
 </script>
 

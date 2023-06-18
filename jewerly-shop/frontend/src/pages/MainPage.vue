@@ -13,6 +13,7 @@ import BannerComponent from '@/components/BannerComponent.vue';
 import RecentlyBoughtComponent from '@/components/RecentlyBoughtComponent.vue';
 import ShortCatalogComponent from '@/components/ShortCatalogComponent.vue'
 import LeadFormComponent from '@/components/LeadFormComponent.vue';
+import Cookies from "js-cookie";
 
 export default {
     name: "main-page",
@@ -25,7 +26,6 @@ export default {
     },
     methods: {
         validate_code(code) {
-            console.log(code);
             const data = {
                 'code': code,
             }
@@ -39,7 +39,11 @@ export default {
             })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                if (data.token !== undefined) {
+                    Cookies.set('jwt', data.token);
+                    this.$root.$emit('loginWithJWT');
+                }
+                location.href = '/';
             })
             .catch((err) => {
                 console.log(err);
