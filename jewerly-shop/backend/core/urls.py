@@ -13,7 +13,7 @@ from django.conf.urls.static import static
 from apps.users.views import authenticate_code
 
 
-schema_view = get_schema_view(  # new
+schema_view = get_schema_view(
     openapi.Info(
         title="Snippets API",
         default_version='v1',
