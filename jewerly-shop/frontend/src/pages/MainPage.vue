@@ -16,7 +16,36 @@ import LeadFormComponent from '@/components/LeadFormComponent.vue';
 
 export default {
     name: "main-page",
-    components: { BannerComponent, RecentlyBoughtComponent, ShortCatalogComponent, LeadFormComponent }
+    components: { BannerComponent, RecentlyBoughtComponent, ShortCatalogComponent, LeadFormComponent },
+    mounted() {
+        const auth_code = this.$route.query.code;
+        if (auth_code !== undefined) {
+            this.validate_code(auth_code);
+        }
+    },
+    methods: {
+        validate_code(code) {
+            console.log(code);
+            const data = {
+                'code': code,
+            }
+
+            fetch(this.$api + 'authenticate-code/', {
+                method: 'post',
+                body: JSON.stringify(data),
+                headers: {
+                    'content-type': 'application/json'
+                },
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
+    }
 }
 </script>
 

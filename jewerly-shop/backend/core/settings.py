@@ -11,9 +11,16 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env(
+    FRONTEND_URL=(str, "http://localhost:8080")
+)
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -176,6 +183,9 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = [
     ('name', 'name'),
     ('email', 'email'),
 ]
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/frontend'
+REDIRECT_FIELD_NAME = 'next'
+ALLOWED_REDIRECT_HOSTS = ['google.com']
+SANITIZE_REDIRECTS = False
 
 LOGIN_REDIRECT_URL = '/admin/'

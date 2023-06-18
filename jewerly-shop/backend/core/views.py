@@ -1,25 +1,8 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout
-from django.contrib.auth import views
-
-from django.contrib.auth.forms import AuthenticationForm, UsernameField
-
-from django import forms
-
-
-class UserLoginForm(AuthenticationForm):
-    def __init__(self, *args, **kwargs):
-        super(UserLoginForm, self).__init__(*args, **kwargs)
-
-    username = UsernameField(widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder': '', 'id': 'hello'}))
-    password = forms.CharField(widget=forms.PasswordInput(
-        attrs={
-            'class': 'form-control',
-            'placeholder': '',
-            'id': 'hi',
-        }
-))
+from social_django.models import Code
+from django.http import JsonResponse
+import os
 
 
 def my_view(request):
@@ -29,7 +12,18 @@ def out(request):
     logout(request)
     return redirect('/')
 
-class MyLoginView(views.LoginView):
-    authentication_form = UserLoginForm
-    template_name = "login.html"
-    redirect_authenticated_user = False
+def signInWithGoogle(request):
+    frontend_url = os.getenv('FRONTEND_URL')
+    client_id = os.getenv('GOOGLE_AUTH_CLIENT_ID')
+    return redirect('https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=' + frontend_url + '&client_id=' + client_id + '&response_type=code&prompt=consent&scope=profile email')
+
+def frontend(request):
+    print(request.user)
+    print(Code.objects.all())
+    
+    return JsonResponse(data={'success':True})
+    
+def read_request(request):
+    print(request)
+    return JsonResponse({'success': True})
+    

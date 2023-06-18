@@ -80,7 +80,7 @@
         Зарегистрироваться
       </a>
       </div>
-    <a class="login-with-google-btn" href='/social-auth/login/google-oauth2'>Войти через Google</a>
+    <a class="login-with-google-btn" href='http://localhost:8000/google-sign-in'>Войти через Google</a>
     </form>
   </main>
 </template>

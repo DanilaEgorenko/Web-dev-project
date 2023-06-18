@@ -10,6 +10,7 @@ from django.views.generic import TemplateView
 from django.urls import re_path
 from django.conf import settings
 from django.conf.urls.static import static
+from apps.users.views import authenticate_code
 
 
 schema_view = get_schema_view(  # new
@@ -29,7 +30,6 @@ schema_view = get_schema_view(  # new
 )
 
 urlpatterns = [
-    path('admin/login/', views.MyLoginView.as_view(), name='login'),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/auth/', include(auth_urls)),
@@ -50,7 +50,11 @@ urlpatterns = [
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += [
-    path('social-auth/', include('social_django.urls', namespace='social')),
+    # path('social-auth/', include('social_django.urls', namespace='social')),
+    path('google-sign-in/', views.signInWithGoogle, name='google-sign-in'),
+    path('test/', views.read_request, name='test'),
     path('', views.my_view),
     path('logout/', views.out, name='logout'),
+    path('frontend/', views.frontend, name='frontend'),
+    path('api/authenticate-code/', authenticate_code, name='authenticate-code')
 ]
