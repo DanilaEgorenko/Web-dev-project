@@ -3,7 +3,7 @@ import SignInPage from '@/pages/SignInPage'
 import CartPage from '@/pages/CartPage'
 import CatalogPage from '@/pages/CatalogPage'
 import ItemPage from '@/pages/ItemPage'
-import ChatComponent from '@/components/ChatComponent'
+import ChatPage from '@/pages/ChatPage'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -38,7 +38,12 @@ const routes = [
   {
     path: '/chat/:id',
     name: 'chat',
-    component: ChatComponent,
+    component: ChatPage,
+  },
+  {
+    path: '/chat',
+    name: 'chat',
+    component: ChatPage,
   }
 ]
 
