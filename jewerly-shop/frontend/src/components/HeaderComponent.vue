@@ -32,8 +32,37 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
+
 export default {
     name: 'header-component',
+    mounted() {
+        const jwt = Cookies.get('jwt');
+        if (jwt) {
+            const data = {
+                'jwt': jwt,
+            }
+
+            fetch(this.$api + 'check-jwt/', {
+                method: 'get',
+                body: JSON.stringify(data),
+                headers: {
+                    "Authorization": "Bearer " + Cookies.get('jwt'),
+                    'content-type': 'application/json'
+                },
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                if (!data.success) {
+                    Cookies.remove('jwt')
+                    location.href = '/?error=session_expired';
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
+    }
 }
 </script>
 

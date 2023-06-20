@@ -68,7 +68,7 @@ class ChatViewSet(ModelViewSet):
             if message.user == user:
                 messages.append({'user': 'you', 'text': message.text})
             else:
-                messages.append({'user': message.user, 'text': message.text})    
+                messages.append({'user': message.user.username, 'text': message.text})    
             
             
         

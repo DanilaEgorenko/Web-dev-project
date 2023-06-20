@@ -1,6 +1,6 @@
 <template>
     <ul class='messages'>
-        <li class='message-box' v-for='message in messages' v-bind:key="message">
+        <li class='message-box' v-for='message in messages' v-bind:key="message.text + message.user + Math.random()">
             <p>{{ message.user }}</p>
             <p>{{ message.text }}</p>
         </li>
