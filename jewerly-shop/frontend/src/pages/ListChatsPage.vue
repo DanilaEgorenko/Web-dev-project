@@ -1,18 +1,21 @@
 <template>
     <div>
-        <h2>Чат с {{ user_to }} ({{ email_to }})</h2>
-        <chat-component :chatId=chatId></chat-component>
+        <ul class='chat-list'>
+            <router-link v-for='chat in chats' v-bind:key='chat.id' :to='"/chat/" + chat.id'>Chat with user {{ chat.user }}</router-link>
+        </ul>
         <form class='form'>
+            <label class='form__label' for="email_to">Почта получателя</label>
+            <input class='form__input' type="email" name="user" id="email_to" v-model='email_to' placeholder='emaxple@mail.ru' required>
             <label class='form__label' for="text">Текст сообщения</label>
             <input class='form__input' type="text" name="text" id="text" v-model='text' placeholder='Ваше сообщение' required>
             <input class='form__submit' type="button" @click='startChat()' value='Начать чат'>
             <p v-if='form_error' style='color: red'>{{ form_error }}</p>
         </form>
+        
     </div>
 </template>
 
 <script>
-import ChatComponent from '@/components/ChatComponent.vue';
 import Cookies from 'js-cookie';
 
 export default {
@@ -20,18 +23,17 @@ export default {
     name: 'chat-page',
     data() {
         return {
-            chatId: this.$route.params.id,
+            chats: [],
             email_to: '',
-            user_to: '',
             text: '',
-            form_error: '',
+            email: localStorage.getItem('email'),
+            form_error: ''
         }
     },
-    components: { ChatComponent },
     mounted() {
         this.chatId = this.$route.params.id;
 
-        const url = this.$api + "chats/" + this.chatId + "/";
+        const url = this.$api + "chats/";
         fetch(url, {
             headers: {
                 "Authorization": "Bearer " + Cookies.get('jwt'),
@@ -44,10 +46,9 @@ export default {
         )
         .then(
             data => {
-                this.user_to = data.recipient_name; 
-                this.email_to = data.recipient_email;
+                this.chats = data;
             }
-        );
+        )
     },
     methods: {
         startChat() {
@@ -71,6 +72,7 @@ export default {
             .then(
                 data => {
                     if (data.success) {
+                        this.$router.push('/chat/' + data.chat_id);
                         this.chatId = data.chat_id;
                     }
                     else {
@@ -95,10 +97,6 @@ export default {
     margin-right: auto;
     gap: 10px;
 
-    &__label {
-        display: none;
-    }
-
     &__input, &__submit {
         height: 30px;
     }
@@ -111,5 +109,12 @@ export default {
     &__submit:active {
         background-color: $pink;
     }
+}
+
+.chat-list {
+    border: solid 1px $pink;
+    padding: 10px;
+    width: fit-content;
+    margin: 50px auto 50px auto;
 }
 </style>

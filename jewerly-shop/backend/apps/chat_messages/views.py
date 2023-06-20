@@ -12,30 +12,67 @@ class ChatViewSet(ModelViewSet):
     Yeah, it is messages viewset :/
     """
     serializer_class = ChatSerializer
-    queryset = Message.objects.all()
+    queryset = Chat.objects.all()
 
     def list(self, request, format=None):
         user = request.user
-        print(user)
+        
         if user.is_anonymous:
             return Response(data={'error': 'you are not logged in'})
         
-        messages = Message.objects.filter(user=user)
-        chat_ids = []
+        chats = Chat.objects.filter(user1=user)
+        chats2 = Chat.objects.filter(user2=user)
+        chat_ids = {}
         
-        for message in messages:
-            if message.chat_id not in []:
-                chat_ids.append(message.chat_id)
+        for chat in chats:
+            if chat.id not in []:
+                chat_ids[str(len(chat_ids))] = { 'id': chat.id, 'user': chat.user2.username }
                 
+        for chat in chats2:
+            if chat.id not in []:
+                chat_ids[str(len(chat_ids))] = { 'id': chat.id, 'user': chat.user1.username }
+        
         return Response(data=chat_ids)
     
 
-    # def retrive(self, request, format=None):
-    #     chat_id = request.chat_id
-    #     queryset = Message.objects.filter(chat_id=chat_id)
-    #     serializer = ChatSerializer(queryset, many=True)
+    def retrieve(self, request,  *args, **kwargs):
+        user = request.user
         
-    #     return Response(serializer.data)
+        if user.is_anonymous:
+            return Response(data={'error': 'you are not logged in'})
+        
+        instance = self.get_object()
+        recipient = instance.user1
+        
+        if user == recipient:
+            recipient = instance.user2
+        
+        recipient_name = recipient.username
+        recipient_email = recipient.email
+        
+        return Response(data={'recipient_name': recipient_name, 'recipient_email': recipient_email })
+
+    @action(methods=['GET'], detail=True)
+    def messages(self, request,  *args, **kwargs):
+        user = request.user
+        
+        if user.is_anonymous:
+            return Response(data={'error': 'you are not logged in'})
+        
+        instance = self.get_object()
+        
+        messages_queryset = Message.objects.filter(chat=instance).order_by('created_at')
+        messages = []
+        
+        for message in messages_queryset:
+            if message.user == user:
+                messages.append({'user': 'you', 'text': message.text})
+            else:
+                messages.append({'user': message.user, 'text': message.text})    
+            
+            
+        
+        return Response(data=messages)
 
     def create(self, request, format=None):
         user = request.user
@@ -52,6 +89,9 @@ class ChatViewSet(ModelViewSet):
         
         if not message_text:
             return Response(data={'error': 'it seems you\'ve sent an empty message'})
+        
+        if user == recipient:
+            return Response(data={'error': 'you can\'t send message to yourself'})
 
         chat = Chat.objects.filter(user1=user, user2=recipient) or Chat.objects.filter(user1=recipient, user2=user)
         if len(chat) > 0:
@@ -61,4 +101,4 @@ class ChatViewSet(ModelViewSet):
 
         Message.objects.create(chat=chat, text=message_text, user=user)
         
-        return Response(data={'success': True})
+        return Response(data={'success': True, 'chat_id': chat.id})

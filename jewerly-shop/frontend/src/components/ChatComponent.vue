@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
+
 export default {
     name: 'chat-component',
     data() {
@@ -15,17 +17,14 @@ export default {
             messages: []
         }
     },
+    props: ['chatId'],
     mounted() {
-        // fetch(this.$api, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json;charset=utf-8'
-        //     },
-        //     body: JSON.stringify(user),
-        // })
-        const chatId = this.$route.params.id
-        const url = this.$api + "/messages?chat_id=" + chatId;
-        fetch(url)
+        const url = this.$api + "chats/" + this.chatId + "/messages/";
+        fetch(url, {
+            headers: {
+                "Authorization": "Bearer " + Cookies.get('jwt'),
+            }
+        })
         .then(
             res => {
                 return res.json();

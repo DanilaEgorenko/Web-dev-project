@@ -4,6 +4,7 @@ import CartPage from '@/pages/CartPage'
 import CatalogPage from '@/pages/CatalogPage'
 import ItemPage from '@/pages/ItemPage'
 import ChatPage from '@/pages/ChatPage'
+import ListChatsPage from '@/pages/ListChatsPage'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -43,7 +44,7 @@ const routes = [
   {
     path: '/chat',
     name: 'chat',
-    component: ChatPage,
+    component: ListChatsPage,
   }
 ]
 
