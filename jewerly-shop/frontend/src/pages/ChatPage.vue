@@ -29,8 +29,6 @@ export default {
     },
     components: { ChatComponent },
     mounted() {
-        this.chatId = this.$route.params.id;
-
         const url = this.$api + "chats/" + this.chatId + "/";
         fetch(url, {
             headers: {

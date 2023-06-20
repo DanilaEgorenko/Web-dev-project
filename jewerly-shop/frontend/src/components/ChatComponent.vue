@@ -9,12 +9,14 @@
 
 <script>
 import Cookies from 'js-cookie';
+import { Centrifuge } from 'centrifuge';
 
 export default {
     name: 'chat-component',
     data() {
         return {
-            messages: []
+            messages: [],
+            ws: new WebSocket('ws://localhost:8001/connection/websocket')
         }
     },
     props: ['chatId'],
@@ -35,6 +37,19 @@ export default {
                 this.messages = data;
             }
         )
+
+        const centrifuge = new Centrifuge('ws://localhost:8001/connection/websocket');
+        const sub = centrifuge.newSubscription('chat:' + this.chatId)
+
+        sub.on('publication', (ctx) => this.updateChat(ctx));
+
+        sub.subscribe();
+        centrifuge.connect();
+    },
+    methods: {
+        updateChat(ctx) {
+            this.messages.push(ctx.data);
+        }
     }
 }
 </script>

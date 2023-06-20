@@ -1,15 +1,16 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.decorators import action
 from .serializers import ChatSerializer
 from .models import Message, Chat
 from apps.users.models import User
+from core.cent import client
+from cent import CentException
 
 class ChatViewSet(ModelViewSet):
     """
-    Yeah, it is messages viewset :/
+    Yeah, it is chat viewset :/
     """
     serializer_class = ChatSerializer
     queryset = Chat.objects.all()
@@ -70,8 +71,6 @@ class ChatViewSet(ModelViewSet):
             else:
                 messages.append({'user': message.user.username, 'text': message.text})    
             
-            
-        
         return Response(data=messages)
 
     def create(self, request, format=None):
@@ -100,5 +99,6 @@ class ChatViewSet(ModelViewSet):
             chat = Chat.objects.create(user1=user, user2=recipient)
 
         Message.objects.create(chat=chat, text=message_text, user=user)
+        client.publish("chat:" + str(chat.id), data={'user': user.username, 'text': message_text})
         
         return Response(data={'success': True, 'chat_id': chat.id})

@@ -27,12 +27,11 @@ export default {
             email_to: '',
             text: '',
             email: localStorage.getItem('email'),
-            form_error: ''
+            form_error: '',
+            chatId: '',
         }
     },
     mounted() {
-        this.chatId = this.$route.params.id;
-
         const url = this.$api + "chats/";
         fetch(url, {
             headers: {
@@ -73,7 +72,6 @@ export default {
                 data => {
                     if (data.success) {
                         this.$router.push('/chat/' + data.chat_id);
-                        this.chatId = data.chat_id;
                     }
                     else {
                         this.form_error = data.error;

@@ -92,6 +92,17 @@ def authenticate_code(request):
     return Response(data={'token': user.token})
 
 
+@api_view(['GET'])
+def check_jwt(request):
+    user = request.user
+    
+    if user.is_anonymous:
+        return Response(data={"error": "no jwt provided"})
+    
+    token = request.user.token
+    return Response(data={"success": True ,"token": token})
+    
+
 class NotAuthenticated(BasePermission):
     def has_permission(self, request, view):
         if request.user.is_anonymous:

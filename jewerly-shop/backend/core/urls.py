@@ -10,7 +10,7 @@ from django.views.generic import TemplateView
 from django.urls import re_path
 from django.conf import settings
 from django.conf.urls.static import static
-from apps.users.views import authenticate_code, get_user, LoginView
+from apps.users.views import authenticate_code, get_user, check_jwt, LoginView
 
 
 schema_view = get_schema_view(
@@ -58,5 +58,6 @@ urlpatterns += [
     path('frontend/', views.frontend, name='frontend'),
     path('api/authenticate-code/', authenticate_code, name='authenticate-code'),
     path('api/get_user/', get_user, name='get-user'),
-    path('api/login/', LoginView.as_view(), name='login')
+    path('api/login/', LoginView.as_view(), name='login'),
+    path('api/check-jwt/', check_jwt, name='get-user'),
 ]
