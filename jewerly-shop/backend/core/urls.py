@@ -24,7 +24,6 @@ from rest_framework import permissions
 from django.views.generic import TemplateView
 from django.urls import re_path
 
-
 schema_view = get_schema_view(  # new
     openapi.Info(
         title="Snippets API",
@@ -47,14 +46,16 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/auth/', include(auth_urls)),
     path(
-    'swagger-ui/',
-    TemplateView.as_view(
-        template_name='swaggerui/swaggerui.html',
-        extra_context={'schema_url': 'openapi-schema'}
-    ),
-    name='swagger-ui'),
+        'swagger-ui/',
+        TemplateView.as_view(
+            template_name='swaggerui/swaggerui.html',
+            extra_context={'schema_url': 'openapi-schema'}
+        ),
+        name='swagger-ui'),
     re_path(
         r'^swagger(?P<format>\.json|\.yaml)$',
         schema_view.without_ui(cache_timeout=0),
         name='schema-json'),
+
+    path('auth/', include('rest_framework_social_oauth2.urls')),
 ]

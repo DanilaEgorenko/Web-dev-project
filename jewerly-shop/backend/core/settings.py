@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -25,7 +24,6 @@ SECRET_KEY = 'django-insecure-h=8q%agz4lhl67^+1ag=p$70@34p8nd3pzk&#ahb%)dkx2av#w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -41,9 +39,13 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
+
+    # 'oauth2_provider',
+    # 'social_django',
+    # 'rest_framework_social_oauth2',
 ]
 
-LOCAL_APPS = [  
+LOCAL_APPS = [
     'apps.goods',
     'apps.orders',
     'apps.users',
@@ -83,6 +85,24 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 AUTH_USER_MODEL = 'users.User'
 
+# SOCIAL_AUTH_VK_OAUTH2_KEY = '51662333'
+# SOCIAL_AUTH_VK_OAUTH2_SECRET = 'eiG8UD8FtgHx9pLhztBM'
+# SOCIAL_AUTH_VK_APP_USER_MODE = 2'
+
+# SOCIAL_AUTH_AUTHENTICATION_BACKENDS = (
+#     'django.contrib.auth.backends.ModelBackend',
+#     'social_core.backends.vk.VKOAuth2',
+#     'rest_framework_social_oauth2.backends.DjangoOAuth2',
+# )
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         # 'oauth2_provider.ext.rest_framework.OAuth2Authentication',  # django-oauth-toolkit < 1.0.0
+#         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
+#         'rest_framework_social_oauth2.authentication.SocialAuthentication',
+#     ),
+# }
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -92,7 +112,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -112,7 +131,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -123,7 +141,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
