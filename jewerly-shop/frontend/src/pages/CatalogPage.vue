@@ -110,9 +110,9 @@
                                 <input
                                     class="catalog-price__slider"
                                     type="range"
-                                    min="1000"
-                                    max="100000"
-                                    step="1000"
+                                    min=1000
+                                    max=991000
+                                    step=10000
                                     v-model="selectedPrice"
                                     @input="filterByPrice"
                                 >
@@ -208,7 +208,7 @@ export default {
                 filteredProducts = filteredProducts.filter(product => product.material === this.selectedMaterial);
             }
 
-            filteredProducts = filteredProducts.filter(product => product.price >= this.selectedPrice);
+            filteredProducts = filteredProducts.filter(product => product.price >= parseInt(this.selectedPrice, 10));
 
             if (this.selectedMinMax === 'cheap') {
                 filteredProducts = filteredProducts.sort((a, b) => a.price - b.price);
