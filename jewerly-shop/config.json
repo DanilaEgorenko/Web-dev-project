@@ -6,5 +6,20 @@
     "allowed_origins": ["*"],
     "client_anonymous": true,
     "anonymous": true,
-    "log_level": "debug"
+    "log_level": "debug",
+    "port": 8001,
+    "insecure": true,
+    "client_insecure": true,
+    "namespaces": [
+        {
+            "name": "chat",
+            "insecure": true,
+            "channels": [{
+                "name": "chat:*",
+                "anonymous": true,
+                "join_leave": true,
+                "publish": true
+            }]
+        }
+      ]
 }
