@@ -8,7 +8,7 @@ class LoggingMiddleware:
         response = self.get_response(request)
 
         # Логируем только GET-запросы
-        if request.method == 'GET':
+        if request.method == 'GET' and request.path[1:6] != "admin":
             VisitLog.objects.create(
                 url=request.path,
                 method=request.method,
