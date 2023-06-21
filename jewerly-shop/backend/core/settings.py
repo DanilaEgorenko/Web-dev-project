@@ -179,6 +179,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'email',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8080']
+
 SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = [
     ('name', 'name'),
     ('email', 'email'),

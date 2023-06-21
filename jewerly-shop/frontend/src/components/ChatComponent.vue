@@ -1,6 +1,6 @@
 <template>
     <ul class='messages'>
-        <li class='message-box' v-for='message in messages' v-bind:key="message">
+        <li class='message-box' v-for='message in messages' v-bind:key="message.text + message.user + Math.random()">
             <p>{{ message.user }}</p>
             <p>{{ message.text }}</p>
         </li>
@@ -8,24 +8,25 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
+import { Centrifuge } from 'centrifuge';
+
 export default {
     name: 'chat-component',
     data() {
         return {
-            messages: []
+            messages: [],
+            ws: new WebSocket('ws://localhost:8001/connection/websocket')
         }
     },
+    props: ['chatId'],
     mounted() {
-        // fetch(this.$api, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json;charset=utf-8'
-        //     },
-        //     body: JSON.stringify(user),
-        // })
-        const chatId = this.$route.params.id
-        const url = this.$api + "/messages?chat_id=" + chatId;
-        fetch(url)
+        const url = this.$api + "chats/" + this.chatId + "/messages/";
+        fetch(url, {
+            headers: {
+                "Authorization": "Bearer " + Cookies.get('jwt'),
+            }
+        })
         .then(
             res => {
                 return res.json();
@@ -36,6 +37,19 @@ export default {
                 this.messages = data;
             }
         )
+
+        const centrifuge = new Centrifuge('ws://localhost:8001/connection/websocket');
+        const sub = centrifuge.newSubscription('chat:' + this.chatId)
+
+        sub.on('publication', (ctx) => this.updateChat(ctx));
+
+        sub.subscribe();
+        centrifuge.connect();
+    },
+    methods: {
+        updateChat(ctx) {
+            this.messages.push(ctx.data);
+        }
     }
 }
 </script>

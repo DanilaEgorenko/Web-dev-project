@@ -13,24 +13,26 @@
         </div>
       </div>
       <div class="signin__form">
-        <input v-if='signInMethod === "email"' type="email" inputmode="email" placeholder="example@mail.ru">
+        <input v-if='signInMethod === "email"' type="email" inputmode="email" placeholder="example@mail.ru" v-model='email'>
         <input v-else-if='signInMethod === "phone"' type="phone" inputmode="tel" placeholder="+7 (___) ___ __ __">
-        <input type="password" placeholder="Введите пароль">
+        <input type="password" placeholder="Введите пароль" v-model='password'>
         <div class="signin__form-checkbox">
           <input type="checkbox" id="remember_me" name="remember_me" checked>
           <label for="remember_me">Запомнить меня</label>
         </div>
       </div>
       <div class="signin__actions">
-        <button class="signin__actions-button" type="submit">Войти</button>
+        <button class="signin__actions-button" @click='login()' type="button">Войти</button>
         <a href="#" class="signin__actions-forgot">Забыли пароль?</a>
         <a href="#" class="signin__actions-registration">Зарегистрироваться</a>
       </div>
       <a class="login-with-google-btn" href='http://localhost:8000/google-sign-in'>Войти через Google</a>
+      <p style='color: red;'>{{ form_error }}</p>
     </form>
     <div v-else>
       <p>{{ username }}</p>
       <p>{{ email }}</p>
+      <img :src="picture" alt="">
       <input type="button" value='Выйти из аккаунта' @click='logout()'>
     </div>
   </main>
@@ -45,7 +47,10 @@ export default {
     return {
       signInMethod: "phone",
       username: localStorage.getItem('username'),
-      email: localStorage.getItem('email'),
+      email: localStorage.getItem('email') || '',
+      password: '',
+      picture: localStorage.getItem('picture'),
+      form_error: '',
     }
   },
   methods: {
@@ -53,9 +58,40 @@ export default {
       Cookies.remove('jwt');
       localStorage.removeItem('username');
       localStorage.removeItem('email');
-      this.$router.push('/');
+      localStorage.removeItem('picture');
+      this.$router.push('/').catch(()=>{});
+    },
+    login() {
+      const url = this.$api + "login/";
+      fetch(url, {
+          method: 'POST',
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+              'email': this.email,
+              'password': this.password
+          })
+      })
+      .then(
+          res => {
+              return res.json();
+          }
+      )
+      .then(
+          data => {
+              if (data.success) {
+                  Cookies.set('jwt', data.token);
+                  this.$root.$emit('loginWithJWT');
+                  this.$router.push('/');
+              }
+              else {
+                  this.form_error = data.error;
+              }
+          }
+      )
     }
-  }
+  },
 }
 </script>
 

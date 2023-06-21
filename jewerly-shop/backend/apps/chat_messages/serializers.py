@@ -5,28 +5,20 @@ from .models import Message
 from apps.users.models import User
 
 
-class MessageSerializer(serializers.Serializer):
-    chat_id = serializers.IntegerField()
-    user = serializers.CharField()
+class ChatSerializer(serializers.Serializer):
+    email = serializers.CharField()
     text = serializers.CharField()
     
     def validate_user(self, value):
         try:
-            User.objects.get(email=value)
-            return value
+            user = User.objects.get(email=value)
+            return user.id
         
         except ObjectDoesNotExist:
             raise serializers.ValidationError("Пользователь {} не найден".format(value))
+        
+    def validate(self, attrs):
+        return attrs
 
-    def create(self, validated_data):
-        chat_id = validated_data['chat_id']
-        email = validated_data['user']
-        text = validated_data['text']
-        user = User.objects.get(email=email)
-        
-        Message.objects.create(chat_id=chat_id, user=user, text=text)
-        
-        return self.data
-    
-    class Meta:
-        fields = ["user", "text", "chat_id", ]
+    # def create(self, validated_data):
+    #     return self.data

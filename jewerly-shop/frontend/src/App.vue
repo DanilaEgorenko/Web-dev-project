@@ -29,7 +29,8 @@ export default {
       .then(data => {
         localStorage.setItem('username', data.username);
         localStorage.setItem('email', data.email);
-        this.$router.push('/');
+        localStorage.setItem('picture', data.picture);
+        this.$router.push('/').catch(()=>{});
       })
       .catch(err => {
         console.log(err)
