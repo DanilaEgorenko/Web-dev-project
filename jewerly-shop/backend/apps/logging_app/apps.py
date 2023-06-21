@@ -6,4 +6,4 @@ class LoggingAppConfig(AppConfig):
     name = 'apps.logging_app'
 
     def ready(self):
-        import apps.logging_app.signals  # Импортируйте здесь, чтобы сигналы были зарегистрированы
+        import apps.logging_app.signals
