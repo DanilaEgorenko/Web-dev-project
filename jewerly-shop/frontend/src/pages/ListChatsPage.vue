@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <main>
         <ul class='chat-list'>
             <router-link v-for='chat in chats' v-bind:key='chat.id' :to='"/chat/" + chat.id'>Chat with user {{ chat.user }}</router-link>
         </ul>
@@ -12,7 +12,7 @@
             <p v-if='form_error' style='color: red'>{{ form_error }}</p>
         </form>
         
-    </div>
+    </main>
 </template>
 
 <script>

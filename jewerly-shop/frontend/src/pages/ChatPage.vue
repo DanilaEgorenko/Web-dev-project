@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <main>
         <h2>Чат с {{ user_to }} ({{ email_to }})</h2>
         <chat-component :chatId=chatId></chat-component>
         <form class='form'>
@@ -8,7 +8,7 @@
             <input class='form__submit' type="button" @click='startChat()' value='Начать чат'>
             <p v-if='form_error' style='color: red'>{{ form_error }}</p>
         </form>
-    </div>
+    </main>
 </template>
 
 <script>

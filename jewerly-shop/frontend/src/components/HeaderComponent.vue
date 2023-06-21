@@ -51,6 +51,9 @@ export default {
                 if (!data.success) {
                     Cookies.remove('jwt')
                     location.href = '/?error=session_expired';
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('picture');
                 }
             })
             .catch((err) => {
